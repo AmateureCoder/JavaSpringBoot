@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+<h2>Sign In</h2>
+<form th:action="@{/perform_login}" th:object="${loginDto}" method="post">
+  <input th:field="*{username}" placeholder="Email"/>
+  <input th:field="*{password}" type="password" placeholder="Password"/>
+  <button type="submit">Login</button>
+</form>
+
+<div th:if="${loginError}">Invalid credentials.</div>
+<div th:if="${justRegistered}">Registration successful. Please login.</div>
+<div th:if="${loggedOut}">You have been logged out.</div>
+<div th:if="${loginSuccess}">
+  <p th:if="${adminSuccess}">You’re logged in as admin (<span th:text="${loginSuccess}"/>).</p>
+  <p th:unless="${adminSuccess}">Welcome, <span th:text="${loginSuccess}"/>!</p>
+</div>
+</body>
+</html>
