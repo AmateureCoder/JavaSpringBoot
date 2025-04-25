@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LibMan | Home</title>
+
+  <link rel="stylesheet" th:href="@{/assets/css/pico.min.css}">
+  <style>
+    section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+    section img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      flex: 1 1 300px;
+    }
+    section > div {
+      flex: 1 1 300px;
+    }
+    form {
+      width: 100%;
+    }
+  </style>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute("data-theme");
+      html.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+    }
+  </script>
+</head>
+<body>
+
+<header class="container-fluid">
+  <nav class="container">
+    <ul>
+      <li><strong>LibMan</strong></li>
+    </ul>
+    <ul>
+      <li><a th:href="@{/login}" role="button" class="contrast">Login</a></li>
+      <li><a th:href="@{/register}" role="button">Register</a></li>
+      <li>
+        <button onclick="toggleTheme()" aria-label="Toggle dark mode">🌓</button>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main class="container">
+
+  <!-- About Section -->
+  <section>
+    <img th:src="@{/assets/images/slide1.jpg}" alt="About image">
+    <div>
+      <h2>About Us</h2>
+      <p>
+        LibMan is a minimalist library management system tailored for schools, institutions, and private collections. Built for speed, simplicity, and accessibility.
+      </p>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section>
+    <div>
+      <h2>Our Services</h2>
+      <ul>
+        <li>Track book availability & lending</li>
+        <li>Manage users and roles</li>
+        <li>Admin dashboard for insights</li>
+        <li>Lightweight & offline-ready</li>
+      </ul>
+    </div>
+    <img th:src="@{/assets/images/slide2.jpg}" alt="Services image">
+  </section>
+
+  <!-- Contact Section -->
+  <section>
+    <img th:src="@{/assets/images/slide3.jpg}" alt="Contact image">
+    <div>
+      <h2>Contact Us</h2>
+      <form method="post" th:action="@{/contact}">
+        <label>
+          Name
+          <input type="text" name="name" required>
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" required>
+        </label>
+        <label>
+          Message
+          <textarea name="message" rows="4" required></textarea>
+        </label>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="container">
+  <small>© 2025 LibMan. All rights reserved.</small>
+</footer>
+
+</body>
+</html>
