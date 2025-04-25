@@ -1,51 +1,49 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en" data-theme="light">
 <head>
     <title>Register</title>
-    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/pico.min.css}">
 </head>
 <body>
-<h2>Sign Up</h2>
-<form th:action="@{/register}" th:object="${user}" method="post">
-    <div>
-        <label>Username</label>
-        <label>
-            <input type="text" th:field="*{username}" />
-        </label>
-        <div th:if="${#fields.hasErrors('username')}"
-             th:errors="*{username}"></div>
-    </div>
-    <div>
-        <label>Email</label>
-        <label>
-            <input type="email" th:field="*{email}" />
-        </label>
-        <div th:if="${#fields.hasErrors('email')}"
-             th:errors="*{email}"></div>
-    </div>
-    <div>
-        <label>Password</label>
-        <label>
-            <input type="password" th:field="*{password}" />
-        </label>
-        <div th:if="${#fields.hasErrors('password')}"
-             th:errors="*{password}"></div>
-    </div>
-    <div>
-        <label>Confirm Password</label>
-        <label>
-            <input type="password" th:field="*{confirmPassword}" />
-        </label>
-        <div th:if="${#fields.hasErrors('confirmPassword')}"
-             th:errors="*{confirmPassword}"></div>
-    </div>
-    <div th:if="${registrationError}">
-        <p th:text="${registrationError}"></p>
-    </div>
-    <button type="submit">Register</button>
-</form>
-<p>
-    Already have an account? <a th:href="@{/login}">Login here</a>
-</p>
+
+<header>
+    <nav class="container-fluid">
+        <ul>
+            <li><strong>LibMan</strong></li>
+        </ul>
+        <ul>
+            <li><a href="/" role="button">Home</a></li>
+            <li><a href="/login" role="button">Login</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="container">
+    <h2>Sign Up</h2>
+    <form th:action="@{/register}" th:object="${user}" method="post">
+        <label for="username">Username</label>
+        <input id="username" type="text" th:field="*{username}" required>
+        <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
+
+        <label for="email">Email</label>
+        <input id="email" type="email" th:field="*{email}" required>
+        <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+
+        <label for="password">Password</label>
+        <input id="password" type="password" th:field="*{password}" required>
+        <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
+
+        <label for="confirmPassword">Confirm Password</label>
+        <input id="confirmPassword" type="password" th:field="*{confirmPassword}" required>
+        <small th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></small>
+
+        <article th:if="${registrationError}">
+            <mark th:text="${registrationError}"></mark>
+        </article>
+
+        <button type="submit" class="contrast">Register</button>
+    </form>
+</main>
+
 </body>
 </html>

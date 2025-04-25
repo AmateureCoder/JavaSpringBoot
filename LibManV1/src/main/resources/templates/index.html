@@ -1,105 +1,113 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Library Management</title>
-  <link rel="stylesheet" th:href="@{/assets/css/chota.min.css}">
-  <link rel="stylesheet" th:href="@{/assets/css/main.css}">
+  <title>LibMan | Home</title>
+
+  <link rel="stylesheet" th:href="@{/assets/css/pico.min.css}">
   <style>
-    .carousel {
-      position: relative;
-      overflow: hidden;
-      height: 400px;
-    }
-    .carousel-slide {
-      display: none;
-      height: 100%;
-      width: 100%;
-      background-size: cover;
-      background-position: center;
-    }
-    .carousel-slide.active {
-      display: block;
-    }
-    .carousel-controls {
-      position: absolute;
-      top: 50%;
-      width: 100%;
+    section {
       display: flex;
-      justify-content: space-between;
-      transform: translateY(-50%);
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 4rem;
     }
-    .carousel-controls button {
-      background: rgba(0,0,0,0.5);
-      border: none;
-      color: white;
-      padding: 1rem;
-      cursor: pointer;
+    section img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      flex: 1 1 300px;
+    }
+    section > div {
+      flex: 1 1 300px;
+    }
+    form {
+      width: 100%;
     }
   </style>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute("data-theme");
+      html.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+    }
+  </script>
 </head>
 <body>
 
-<!-- Navigation -->
-<nav class="nav">
-  <div class="nav-left">
-    <a href="#" class="brand">LibMan</a>
-  </div>
-  <div class="nav-right">
-    <a href="#about">About Us</a>
-    <a href="#services">Our Services</a>
-    <a href="#contact">Contact</a>
-    <a th:href="@{/register}" class="button outline">Register</a>
-    <a th:href="@{/login}" class="button">Login</a>
-  </div>
-</nav>
+<header class="container-fluid">
+  <nav class="container">
+    <ul>
+      <li><strong>LibMan</strong></li>
+    </ul>
+    <ul>
+      <li><a th:href="@{/login}" role="button" class="contrast">Login</a></li>
+      <li><a th:href="@{/register}" role="button">Register</a></li>
+      <li>
+        <button onclick="toggleTheme()" aria-label="Toggle dark mode">🌓</button>
+      </li>
+    </ul>
+  </nav>
+</header>
 
-<!-- Hero Carousel -->
-<section class="carousel">
-  <div class="carousel-slide active" style="background-image: url('/assets/images/slide1.jpg');"></div>
-  <div class="carousel-slide" style="background-image: url('/assets/images/slide2.jpg');"></div>
-  <div class="carousel-slide" style="background-image: url('/assets/images/slide3.jpg');"></div>
-  <div class="carousel-controls">
-    <button id="prev">&#10094;</button>
-    <button id="next">&#10095;</button>
-  </div>
-</section>
+<main class="container">
 
-<!-- About Us -->
-<section id="about" class="container">
-  <h2>About Us</h2>
-  <p>Welcome to LibMan, your comprehensive solution for managing library resources efficiently.</p>
-</section>
-
-<!-- Our Services -->
-<section id="services" class="container">
-  <h2>Our Services</h2>
-  <ul>
-    <li>Book Lending and Returns</li>
-    <li>Member Management</li>
-    <li>Catalog Search</li>
-    <li>Overdue Notifications</li>
-  </ul>
-</section>
-
-<!-- Contact Us -->
-<section id="contact" class="container">
-  <h2>Contact Us</h2>
-  <form th:action="@{/contact}" method="post">
-    <div class="row">
-      <div class="col">
-        <input type="text" name="name" placeholder="Your Name" required>
-      </div>
-      <div class="col">
-        <input type="email" name="email" placeholder="Your Email" required>
-      </div>
+  <!-- About Section -->
+  <section>
+    <img th:src="@{/assets/images/slide1.jpg}" alt="About image">
+    <div>
+      <h2>About Us</h2>
+      <p>
+        LibMan is a minimalist library management system tailored for schools, institutions, and private collections. Built for speed, simplicity, and accessibility.
+      </p>
     </div>
-    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-    <button type="submit" class="button primary">Send Message</button>
-  </form>
-</section>
+  </section>
 
-<script th:src="@{/assets/js/carousel.js}"></script>
+  <!-- Services Section -->
+  <section>
+    <div>
+      <h2>Our Services</h2>
+      <ul>
+        <li>Track book availability & lending</li>
+        <li>Manage users and roles</li>
+        <li>Admin dashboard for insights</li>
+        <li>Lightweight & offline-ready</li>
+      </ul>
+    </div>
+    <img th:src="@{/assets/images/slide2.jpg}" alt="Services image">
+  </section>
+
+  <!-- Contact Section -->
+  <section>
+    <img th:src="@{/assets/images/slide3.jpg}" alt="Contact image">
+    <div>
+      <h2>Contact Us</h2>
+      <form method="post" th:action="@{/contact}">
+        <label>
+          Name
+          <input type="text" name="name" required>
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" required>
+        </label>
+        <label>
+          Message
+          <textarea name="message" rows="4" required></textarea>
+        </label>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="container">
+  <small>© 2025 LibMan. All rights reserved.</small>
+</footer>
+
 </body>
 </html>
