@@ -1,0 +1,9 @@
+@import url(chota.css)
+:root{
+  --bg-color: #27443f;
+  --bg-secondary-color: #f2fdfd;
+  --color-primary: #c7f9cc;
+  --color-lightGrey: #57cc99;
+  --color-grey: #38a3a5;
+  --color-darkGrey: #22577a;
+}
