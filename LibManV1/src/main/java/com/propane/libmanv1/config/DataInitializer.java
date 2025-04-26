@@ -24,7 +24,7 @@ public class DataInitializer implements ApplicationRunner {
         Role adminRole = roleRepo.findByName("ROLE_ADMIN")
                 .orElseGet(() -> roleRepo.save(Role.builder().name("ROLE_ADMIN").build()));
 
-        Role userRole = roleRepo.findByName("ROLE_USER")
+        roleRepo.findByName("ROLE_USER")
                 .orElseGet(() -> roleRepo.save(Role.builder().name("ROLE_USER").build()));
 
         if (userRepo.findByEmail("admin@bookmanager.com").isEmpty()) {
