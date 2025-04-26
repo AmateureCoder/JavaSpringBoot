@@ -7,16 +7,27 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.UserDetailsService;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-    private final UserDetailsService userDetailsService;
+
+    @Bean
+    public AuthenticationSuccessHandler successHandler() {
+        return (request, response, authentication) -> {
+            if (authentication.getAuthorities().stream().anyMatch(a -> "ROLE_ADMIN".equals(a.getAuthority()))) {
+                response.sendRedirect("/admin/manage-users");
+            } else {
+                response.sendRedirect("/home");
+            }
+        };
+    }
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -30,8 +41,9 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/perform_login")
-                        .defaultSuccessUrl("/login?success", true)
+                        .defaultSuccessUrl("/home", true)
                         .failureUrl("/login?error")
+                        .successHandler(successHandler())
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")

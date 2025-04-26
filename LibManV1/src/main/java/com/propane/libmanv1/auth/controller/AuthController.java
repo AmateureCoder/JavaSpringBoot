@@ -9,15 +9,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
 @Controller
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
+
     @GetMapping("/register")
     public String showRegistration(Model model) {
         model.addAttribute("user", new RegistrationDto());
         return "pages/register";
     }
+
     @PostMapping("/register")
     public String register(
             @ModelAttribute("user") @Valid RegistrationDto dto,
@@ -27,6 +30,7 @@ public class AuthController {
         authService.register(dto);
         return "redirect:/login?registered";
     }
+
     @GetMapping("/login")
     public String showLoginForm(
             @RequestParam(value="error", required=false) String error,
@@ -50,4 +54,12 @@ public class AuthController {
         return "pages/login";
     }
 
+    @PostMapping("/perform_login")
+    public String loginSuccess(Authentication auth) {
+        if (auth.getAuthorities().stream().anyMatch(a -> "ROLE_ADMIN".equals(a.getAuthority()))) {
+            return "redirect:/admin/manage-users";  // Redirect admin to dashboard
+        } else {
+            return "redirect:/home";  // Redirect regular user to home page
+        }
+    }
 }
