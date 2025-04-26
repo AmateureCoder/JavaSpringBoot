@@ -7,6 +7,9 @@ import com.propane.libmanv1.identity.service.RoleService;
 import com.propane.libmanv1.identity.service.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -43,4 +46,17 @@ public class UserServiceImpl implements UserService {
         user.getRoles().add(role);
         userRepo.save(user);
     }
+    public User getCurrentUser() {
+        // Implement logic to retrieve the currently authenticated user
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        return userRepo.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found:" + username));
+
+    }   
 }
