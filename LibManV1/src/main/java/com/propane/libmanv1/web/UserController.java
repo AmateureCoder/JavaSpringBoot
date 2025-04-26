@@ -10,6 +10,10 @@ public class UserController {
     public String userDashboard() {
         return "user/user-dashboard";
     }
+    @GetMapping("/user/profile")
+    public String userProfile() {
+        return "user/user-profile"; // Ensure the user-profile.html exists in templates/user/
+    }
 
     // Add more mappings for user-specific functionalities if needed
 }
