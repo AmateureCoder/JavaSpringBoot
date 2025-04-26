@@ -1,0 +1,18 @@
+.home-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.home-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    flex: 1 1 300px;
+}
+
+.home-section > div {
+    flex: 1 1 300px;
+}

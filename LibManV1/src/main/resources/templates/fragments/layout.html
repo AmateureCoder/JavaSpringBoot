@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="${title}">LibMan</title>
+  <link rel="stylesheet" th<!DOCTYPE html>
+  <html xmlns:th="http://www.thymeleaf.org" lang="en" data-theme="light" th:fragment="layout (title, content)">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title}">LibMan</title>
+    <link rel="stylesheet" th:href="@{/assets/css/pico.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/custom.css}">
+    <script>
+      function toggleTheme() {
+        const html = document.documentElement;
+        const current = html.getAttribute("data-theme");
+        html.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+      }
+    </script>
+  </head>
+
+  <body>
+  <header th:replace="~{fragments/navbar :: navbar}"></header>
+
+  <main class="container">
+    <div th:replace="${content}"></div> <!-- Dynamic page content -->
+  </main>
+
+  <footer th:replace="~{fragments/footer :: footer}"></footer>
+  </body>
+  </html>:href="@{/assets/css/pico.min.css}">
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute("data-theme");
+      html.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+    }
+  </script>
+</head>
+
+<body th:fragment="layout (title, content)">
+<header th:replace="~{fragments/navbar :: navbar}"></header>
+
+<main class="container">
+  <div th:replace="${content}"></div> <!-- Dynamic page content -->
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

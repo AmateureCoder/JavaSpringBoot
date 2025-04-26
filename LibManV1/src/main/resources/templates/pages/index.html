@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      th:replace="~{fragments/layout :: layout('LibMan | Home', ~{::content})}">
+
+<th:block th:fragment="content">
+  <section class="home-section">
+    <img th:src="@{/assets/images/slide1.jpg}" alt="About image">
+    <div>
+      <h2>About Us</h2>
+      <p>LibMan is a minimalist library management system tailored for schools, institutions, and private collections. Built for speed, simplicity, and accessibility.</p>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div>
+      <h2>Our Services</h2>
+      <ul>
+        <li>Track book availability & lending</li>
+        <li>Manage users and roles</li>
+        <li>Admin dashboard for insights</li>
+        <li>Lightweight & offline-ready</li>
+      </ul>
+    </div>
+    <img th:src="@{/assets/images/slide2.jpg}" alt="Services image">
+  </section>
+
+  <section class="home-section">
+    <img th:src="@{/assets/images/slide3.jpg}" alt="Contact image">
+    <div>
+      <h2>Contact Us</h2>
+      <form method="post" th:action="@{/contact}">
+        <label>Name <input type="text" name="name" required></label>
+        <label>Email <input type="email" name="email" required></label>
+        <label>Message <textarea name="message" rows="4" required></textarea></label>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </section>
+</th:block>
+
+</html>

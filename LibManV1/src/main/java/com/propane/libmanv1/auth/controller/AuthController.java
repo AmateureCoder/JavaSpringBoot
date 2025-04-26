@@ -16,14 +16,14 @@ public class AuthController {
     @GetMapping("/register")
     public String showRegistration(Model model) {
         model.addAttribute("user", new RegistrationDto());
-        return "register";
+        return "pages/register";
     }
     @PostMapping("/register")
     public String register(
             @ModelAttribute("user") @Valid RegistrationDto dto,
             BindingResult br
     ) {
-        if (br.hasErrors()) return "register";
+        if (br.hasErrors()) return "pages/register";
         authService.register(dto);
         return "redirect:/login?registered";
     }
@@ -47,7 +47,7 @@ public class AuthController {
                             .anyMatch(a -> "ROLE_ADMIN".equals(a.getAuthority()))
             );
         }
-        return "login";
+        return "pages/login";
     }
 
 }
