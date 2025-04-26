@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{user/layout :: user-layout(~{::section}, 'User Profile')}">
+<section>
+    <h1>Your Profile</h1>
+    <p>Manage your profile details here.</p>
+    <form th:action="@{/user/profile}" method="post">
+        <label for="name">Name</label>
+        <input id="name" type="text" name="name" th:value="${user.name}" required>
+
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email" th:value="${user.email}" required>
+
+        <button type="submit">Save Changes</button>
+    </form>
+</section>
+</html>

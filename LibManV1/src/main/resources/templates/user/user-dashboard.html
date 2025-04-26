@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{user/layout :: user-layout(~{::section}, 'User Dashboard')}">
+<section>
+    <h1>Welcome, <span th:text="${#authentication.name}">User</span>!</h1>
+    <p>This is your dashboard. Use the navigation links to explore the features.</p>
+    <section>
+        <h2>Features</h2>
+        <ul>
+            <li><a href="/user/books">View Available Books</a></li>
+            <li><a href="/user/profile">Manage Your Profile</a></li>
+            <!-- Add more links as needed -->
+        </ul>
+    </section>
+</section>
+</html>
