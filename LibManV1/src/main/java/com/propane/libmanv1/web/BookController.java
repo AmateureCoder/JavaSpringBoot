@@ -6,17 +6,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.propane.libmanv1.identity.model.Book;
-import com.propane.libmanv1.identity.service.BookService;
+import com.propane.libmanv1.identity.service.imp.BookServiceImpl;
 
 @Controller
 @RequestMapping("/admin/books")
 @RequiredArgsConstructor
 public class BookController {
-    private final BookService bookService;
+    private final BookServiceImpl bookServiceImpl;
 
     @GetMapping
     public String listBooks(Model model) {
-        model.addAttribute("books", bookService.getAllBooks());
+        model.addAttribute("books", bookServiceImpl.getAllBooks());
         return "admin/books/list";
     }
 
@@ -28,26 +28,26 @@ public class BookController {
 
     @PostMapping("/add")
     public String addBook(@ModelAttribute Book book) {
-        bookService.saveBook(book);
+        bookServiceImpl.saveBook(book);
         return "redirect:/admin/books";
     }
 
     @GetMapping("/edit/{id}")
     public String showEditBookForm(@PathVariable Long id, Model model) {
-        model.addAttribute("book", bookService.getBookById(id));
+        model.addAttribute("book", bookServiceImpl.getBookById(id));
         return "admin/books/edit";
     }
 
     @PostMapping("/edit/{id}")
     public String editBook(@PathVariable Long id, @ModelAttribute Book book) {
         book.setId(id);
-        bookService.saveBook(book);
+        bookServiceImpl.saveBook(book);
         return "redirect:/admin/books";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteBook(@PathVariable Long id) {
-        bookService.deleteBook(id);
+        bookServiceImpl.deleteBook(id);
         return "redirect:/admin/books";
     }
 }

@@ -1,4 +1,4 @@
-package com.propane.libmanv1.identity.service;
+package com.propane.libmanv1.identity.service.imp;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class BookService {
+public class BookServiceImpl {
     private final BookRepository bookRepository;
 
     public List<Book> getAllBooks() {

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{admin/layout :: admin-layout(~{::section}, 'Manage Members')}">
+<section>
+    <h1>Manage Members</h1>
+    <a href="/admin/members/add">Add Member</a>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile Number</th>
+            <th>Address</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="member : ${members}">
+            <td th:text="${member.name}"></td>
+            <td th:text="${member.email}"></td>
+            <td th:text="${member.mobileNumber}"></td>
+            <td th:text="${member.address}"></td>
+            <td>
+                <a th:href="@{/admin/members/edit/{id}(id=${member.id})}">Edit</a>
+                <a th:href="@{/admin/members/delete/{id}(id=${member.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+</html>
