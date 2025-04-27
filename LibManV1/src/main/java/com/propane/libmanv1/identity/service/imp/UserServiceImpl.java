@@ -36,6 +36,11 @@ public class UserServiceImpl implements UserService {
                 .build();
         userRepo.save(user);
     }
+    @Override
+    @Transactional
+    public void save(User user) {
+        userRepo.save(user);
+    }
 
     @Override
     @Transactional
@@ -58,5 +63,19 @@ public class UserServiceImpl implements UserService {
         return userRepo.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found:" + username));
 
-    }   
+    }
+    @Override
+    @Transactional
+    public void updateUser(String username, String name, String email) {
+        // Retrieve the user from the database
+        User user = userRepo.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found:" + username));
+
+        // Update user details
+        user.setUsername(name);  // Assuming 'name' corresponds to the username (or you can have a separate 'full name' field)
+        user.setEmail(email);
+
+        // Save updated user
+        userRepo.save(user);
+    }
 }

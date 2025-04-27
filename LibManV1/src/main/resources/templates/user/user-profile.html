@@ -6,7 +6,7 @@
     <p>Manage your profile details here.</p>
     <form th:action="@{/user/profile}" method="post">
         <label for="name">Name</label>
-        <input id="name" type="text" name="name" th:value="${user.name}" required>
+        <input id="name" type="text" name="name" th:value="${user.username}" required>
 
         <label for="email">Email</label>
         <input id="email" type="email" name="email" th:value="${user.email}" required>
