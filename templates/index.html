@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header('Home - YayJobs!')"></head>
+<body>
+<div th:replace="fragments/spinner :: spinner"></div>
+<div th:replace="fragments/navbar :: navbar"></div>
+<!-- Page content -->
+<div class="container text-center py-5">
+    <h1 class="display-4 mb-3">Welcome to YayJobs!</h1>
+    <p class="lead mb-4">A modern Bootstrap 5 admin template. Please register or login to continue.</p>
+    <a th:href="@{/register}" class="btn btn-lg btn-outline-warning me-2">Register</a>
+    <a th:href="@{/login}" class="btn btn-lg btn-warning">Login</a>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
